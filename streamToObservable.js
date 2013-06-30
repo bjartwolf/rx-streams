@@ -1,9 +1,12 @@
 // Takes a node-stream in objectmode and returns an Observable
 // Stream should be writable so you can pipe to it
 // Should take a writable stream as input
+// Seems to be simplest when making a dummy throughstream, using
+// the pipe interface takes care of stuff I don't want to implement myself
+
 var rx = require('rx');
 var streams = require('stream');
-var toObservable = function(stream) {
+var StreamToObservable = function(stream) {
 	// throw or something if not input is readable object stream
 	var self = this;
     var throughStream = new streams.PassThrough({objectMode: true});
@@ -19,4 +22,4 @@ var toObservable = function(stream) {
 		};
 	});
 };
-module.exports = toObservable;
+module.exports = StreamToObservable;

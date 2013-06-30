@@ -1,3 +1,15 @@
+# Testing this out
+Just run 
+
+node tryObservableToStream
+
+or
+
+node tryStreamToObservable 
+
+
+Both test-data streams are set to end after 3000 ms
+
 # From Rx to node streams and back
 This is just work in progress. My plan is to do use-case by use-case until my brain explodes. The simplest ones are ok, the harder use-cases might require some thinking, and the two different streams implementations might turn out to have inconsistencies that will be hard to smooth out without creating leaky abstractions.
 

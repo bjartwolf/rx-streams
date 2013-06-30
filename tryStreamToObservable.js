@@ -12,9 +12,15 @@ var altitudeObs = testObs.where(function(navdata) {
      return navdata.demo.altitudeMeters;});
 var subscription = altitudeObs.subscribe(function (x) {
      console.log(x);
-  });
+   });
 
 // Unpiping the serializer
-setTimeout(function () {serializer.unpipe();}, 1000);
+setTimeout(function () {
+    droneStream.unpipe(serializer);
+    console.log("PIPECOUNT: " + droneStream._readableState.pipesCount);
+    }, 1000);
 // Dismissing subscription 
-setTimeout(function () {subscription.dispose();}, 2000);
+setTimeout(function () {
+    subscription.dispose();
+    console.log("PIPECOUNT: " + droneStream._readableState.pipesCount);
+    }, 2000);
