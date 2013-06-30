@@ -4,22 +4,21 @@
 // Should call rx dispose on unpipe
 var stream = require('stream');
 
-ObjectStream.prototype = Object.create(stream.Transform.prototype, {
+ObjectStream.prototype = Object.create(stream.Readable.prototype, {
   constructor: { value: ObjectStream }
 });
 
 function ObjectStream(obs, rxFunction) {
   // Throw if not observables etc, simple checking on type
   var self = this;
-  stream.Transform.call(this, {objectMode: true}); 
+  stream.Readable.call(this, {objectMode: true}); 
   var transformedObs = rxFunction.call(this, obs);
   transformedObs.subscribe(function (x) {
-      self._transform(x);
+      self.push(x);
   });
 }
 
-ObjectStream.prototype._transform = function(chunk, encoding, done) {
-  this.push(chunk);
+ObjectStream.prototype._read = function(chunk, encoding, done) {
 };
 
 module.exports = ObjectStream;
