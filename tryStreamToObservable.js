@@ -1,6 +1,6 @@
 var StreamToObservable= require('./streamToObservable');
 var rx = require('rx');
-var droneStream = require('./droneTestDataStream.js');
+var droneStream = require('./droneTestdataStream.js');
 
 var testObs = new StreamToObservable(droneStream);
 var Serializer = require('./serializer'); 
