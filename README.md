@@ -12,4 +12,7 @@ var rxFunc = function (obs) {
   .select(function(navdata) { return navdata.demo.altitudeMeters;})
 };
 ```
-The returned stream is a transform stream that subscribes to the rx function.
+The constructor takes the obserable stream to convert and the rx function and returns a proper streams2 stream.
+```javascript
+var testStream = new ObservableToStream(obsDrone, rxFunc);
+```
