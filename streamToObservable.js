@@ -12,7 +12,7 @@ var toObservable = function(stream) {
 		stream.addListener('readable', handler);
 		// should do some unpipe or something maybe... Not thought of this yet
 		return function() {
-			parent.removeListener(eventName, handler);
+			parent.removeListener('readable', handler);
 		};
 	});
 };

@@ -11,7 +11,9 @@ Some things should be simple, such as wrapping rx in streams and the other way a
 
 ## Observables to node streams
 Implemented proof of concept for transforming rx-obsverable to node stream.
-It works by giving the ObservableToStream constructor an observable rx-stream and a rx-function that does transformations. This could be something like
+It works by giving the ObservableToStream constructor an observable rx-stream and a rx-function that does transformations.
+
+### Example 
 ```javascript
 var rxFunc = function (obs) {
   return obs.where(function(navdata) { return navdata && navdata.demo && navdata.demo.altitudeMeters;})
@@ -23,6 +25,25 @@ The constructor takes the obserable stream (in the example: obsDrone) to convert
 var testStream = new ObservableToStream(obsDrone, rxFunc);
 ```
 
+### TODO
+Unpiping
+Tests
+
+## Node-streams to observables
+Again a proof of concept for transforming node-streams to observables. Instead of the hack of listening to data-events (Listening for data-events turns streams into old mode.). Instead it listens for readable events, then it reads the stream and calls onNext.
+
+
+### Example 
+```javascript
+var testObs = new StreamToObservable(droneStream);
+```
+
+### TODO
+Should throw if trying to convert a stream which is not an object stream. 
+Unpiping
+Tests
+
+
 ## Cold vs hot observables
-Hot observables can't be paused. They can be deferred somehow, but not sure if that helps or not. Should at least consider pausing/unsubscribing temporarily from cold observables if downstream buffers are full.
+Hot observables can't be paused. They can be deferred somehow, but not sure if that helps or not, not sure what the defer function does, I've just heard about it. Should at least consider pausing/unsubscribing temporarily from cold observables if downstream buffers are full.
 
