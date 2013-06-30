@@ -37,6 +37,17 @@ Again a proof of concept for transforming node-streams to observables. Instead o
 ```javascript
 var testObs = new StreamToObservable(droneStream);
 ```
+This turns a readable stream into an observable so that you for example can do:
+
+```javascript
+testObs.where(function(navdata) { 
+     return navdata && navdata.demo && navdata.demo.altitudeMeters;})
+  .select(function(navdata) { 
+     return navdata.demo.altitudeMeters;})
+  .subscribe(function (x) {
+     console.log(x);
+  });
+```
 
 ### TODO
 Should throw if trying to convert a stream which is not an object stream. 
