@@ -13,7 +13,6 @@ function ObjectStream(obs, rxFunction) {
   var self = this;
   stream.Transform.call(this, {objectMode: true}); 
   var transformedObs = rxFunction.call(this, obs);
-  console.log(transformedObs);
   transformedObs.subscribe(function (x) {
       self._transform(x);
   });
