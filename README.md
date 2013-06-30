@@ -14,15 +14,9 @@ Implemented proof of concept for transforming rx-obsverable to node stream.
 It works by giving the ObservableToStream constructor an observable rx-stream and a rx-function that does transformations.
 
 ### Example 
+The constructor takes the obserable stream (in the example: obsDrone) to convert 
 ```javascript
-var rxFunc = function (obs) {
-  return obs.where(function(navdata) { return navdata && navdata.demo && navdata.demo.altitudeMeters;})
-  .select(function(navdata) { return navdata.demo.altitudeMeters;})
-};
-```
-The constructor takes the obserable stream (in the example: obsDrone) to convert and the rx function (rxFunc) and returns a proper streams2 stream.
-```javascript
-var testStream = new ObservableToStream(obsDrone, rxFunc);
+var testStream = new ObservableToStream(obsDrone);
 ```
 
 ### TODO
