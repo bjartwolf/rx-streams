@@ -1,8 +1,9 @@
-// Takes a node-stream in objectmode and returns an Observable
-// Stream should be writable so you can pipe to it
-// Should take a writable stream as input
-// Seems to be simplest when making a dummy throughstream, using
-// the pipe interface takes care of stuff I don't want to implement myself
+/*
+  Takes a node-stream in objectmode and returns an Observable
+  Should take a readble stream in objectmode as input
+  Seems to be simplest when making a dummy throughstream, using
+  the pipe interface takes care of stuff I don't want to implement myself
+*/
 
 var rx = require('rx');
 var streams = require('stream');

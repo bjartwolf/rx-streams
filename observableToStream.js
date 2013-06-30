@@ -1,7 +1,9 @@
-// Takes an observable and returns a node-js objectstream
-// Can subscribe to the objectstream with the _transform
-// as the last call 
-// Should call rx dispose on unpipe
+/*
+  Takes an observable and returns a node-js objectstream
+  Can subscribe to the objectstream with the _transform
+  as the last call 
+  Should call rx dispose on unpipe
+*/
 var stream = require('stream');
 
 ObjectStream.prototype = Object.create(stream.Readable.prototype, {
@@ -12,7 +14,6 @@ function ObjectStream(obs) {
   if((typeof obs._subscribe) !== "function") {
     throw new Error("Must be an rx observable");
   };
-  // Throw if not observables etc, simple checking on type
   var self = this;
   stream.Readable.call(this, {objectMode: true}); 
   obs.subscribe(function (x) {

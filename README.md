@@ -32,7 +32,6 @@ var testStream = new ObservableToStream(obsDrone);
 ```
 
 ### TODO
-Unpiping
 Tests
 
 ## Node-streams to observables
@@ -56,8 +55,6 @@ testObs.where(function(navdata) {
 ```
 
 ### TODO
-Should throw if trying to convert a stream which is not an object stream. 
-Unpiping
 Tests
 
 
