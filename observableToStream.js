@@ -19,7 +19,7 @@ function ObjectStream(obs) {
 
 ObjectStream.prototype._read = function(chunk, encoding, done) {
 // do nothing when trying to read from underlying source
-// rx is pushing data anyway
+// rx observables are pushed based 
 };
 
 module.exports = ObjectStream;
