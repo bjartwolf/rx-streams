@@ -7,7 +7,9 @@
 var rx = require('rx');
 var streams = require('stream');
 var StreamToObservable = function(stream) {
-	// throw or something if not input is readable object stream
+    if (!stream._readableState.objectMode){
+        throw new Error("Stream should be in object mode");
+    };
 	var self = this;
     var throughStream = new streams.PassThrough({objectMode: true});
 	return rx.Observable.create(function(observer) {
