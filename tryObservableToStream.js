@@ -1,6 +1,6 @@
 var ObservableToStream = require('./observableToStream');
 var rx = require('rx');
-var obsDrone = require('./droneTestDataStream.js');
+var obsDrone = require('./droneTestdataObservable.js');
 
 var rxFunc = function (obs) {
   return obs.where(function(navdata) { return navdata && navdata.demo && navdata.demo.altitudeMeters;})
