@@ -10,7 +10,7 @@ var StreamToObservable = function(stream) {
     if (!stream._readableState.objectMode){
         throw new Error("Stream should be in object mode");
     };
-	var self = this;
+    var self = this;
     var throughStream = new streams.PassThrough({objectMode: true});
 	return rx.Observable.create(function(observer) {
 		var handler = function () {

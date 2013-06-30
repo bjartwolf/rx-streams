@@ -9,6 +9,9 @@ ObjectStream.prototype = Object.create(stream.Readable.prototype, {
 });
 
 function ObjectStream(obs) {
+  if((typeof obs._subscribe) !== "function") {
+    throw new Error("Must be an rx observable");
+  };
   // Throw if not observables etc, simple checking on type
   var self = this;
   stream.Readable.call(this, {objectMode: true}); 
