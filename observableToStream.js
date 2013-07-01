@@ -16,9 +16,11 @@ function ObjectStream(obs) {
   };
   var self = this;
   stream.Readable.call(this, {objectMode: true}); 
-  obs.subscribe(function (x) {
+  var subscription = obs.subscribe(function (x) {
       self.push(x);
   });
+  // Need to bind this somehow
+  this.dispose = function () { subscription.dispose() } ;   
 }
 
 ObjectStream.prototype._read = function(chunk, encoding, done) {

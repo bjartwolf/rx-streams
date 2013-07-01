@@ -58,6 +58,10 @@ testObs.where(function(navdata) {
 Tests
 
 
+## OnError and OnCompleted
+This should map fairly well from rx to streams.
+
+
 ## Cold vs hot observables
-Hot observables can't be paused. They can be deferred somehow, but not sure if that helps or not, not sure what the defer function does, I've just heard about it. Should at least consider pausing/unsubscribing temporarily from cold observables if downstream buffers are full.
+Hot observables can't be paused. They can be deferred somehow, but not sure if that helps or not, not sure what the defer function does, I've just heard about it. Should at least consider pausing/unsubscribing temporarily from cold observables if downstream buffers are full. Need a deeper understnading of the cold vs. hot stuff.
 
