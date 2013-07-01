@@ -23,8 +23,6 @@ function ObjectStream(obs) {
     self.push(x);
   };
   // Not sure if errors should be propagated into streams.
-  // They should not go from stream to stream, but from observable to stream makes sense, if 
-  // what you are doing is wrapping the stream
   self.onError = function (err) { 
     self.emit('error', err);
   };
@@ -40,6 +38,7 @@ function ObjectStream(obs) {
 ObjectStream.prototype._read = function(chunk, encoding, done) {
 // do nothing when trying to read from underlying source
 // rx observables are pushed based 
+// However, cold observables might be pull based (not sure yet) and could possibly go into here
 };
 
 module.exports = ObjectStream;
