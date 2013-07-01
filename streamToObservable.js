@@ -14,6 +14,7 @@ var StreamToObservable = function(stream) {
     var self = this;
     var throughStream = new streams.PassThrough({objectMode: true});
     return rx.Observable.create(function(observer) {
+        // the subscribe method
         var handler = function () {
             observer.onNext(throughStream.read());// object stream should only emit single object
         };

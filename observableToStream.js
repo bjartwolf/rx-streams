@@ -16,11 +16,25 @@ function ObjectStream(obs) {
   };
   var self = this;
   stream.Readable.call(this, {objectMode: true}); 
-  var subscription = obs.subscribe(function (x) {
-      self.push(x);
-  });
-  // Need to bind this somehow
-  this.dispose = function () {subscription.dispose() } ;   
+  // The stream is the observer
+  // And should implement the IObserver interface (should have an onError, onNext and onCompleted)
+  var subscription = obs.subscribe(self);
+  self.onNext = function (x) {
+    self.push(x);
+  };
+  // Not sure if errors should be propagated into streams.
+  // They should not go from stream to stream, but from observable to stream makes sense, if 
+  // what you are doing is wrapping the stream
+  self.onError = function (err) { 
+    self.emit('error', err);
+  };
+  self.onCompleted = function () { 
+    self.emit('end');
+    subscription.dispose()
+  };
+  // Need to somehow keep the subscription to be able to dispose it, for know tying it to onCompleted
+  // Maybe tie it to unpipe or something also or instead?
+  // Then, when something unpipes, it could call the dispose function and dismiss the subscription
 }
 
 ObjectStream.prototype._read = function(chunk, encoding, done) {
@@ -29,4 +43,3 @@ ObjectStream.prototype._read = function(chunk, encoding, done) {
 };
 
 module.exports = ObjectStream;
-

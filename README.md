@@ -67,3 +67,13 @@ error handling you want to do, including calling onError...?
 ## Cold vs hot observables
 Hot observables can't be paused. They can be deferred somehow, but not sure if that helps or not, not sure what the defer function does, I've just heard about it. Should at least consider pausing/unsubscribing temporarily from cold observables if downstream buffers are full. Need a deeper understnading of the cold vs. hot stuff.
 
+## IObserver
+IObserver interface:
+
+OnCompleted
+OnError
+OnNext
+
+Calls the IOBservable's subscribe function with 
+## IObservable
+Subscribe (returns IDisposable): Notifies the provider that an observer is to recieve notifications. 
