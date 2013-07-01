@@ -76,3 +76,8 @@ OnNext
 Calls the IOBservable's subscribe function with 
 ## IObservable
 Subscribe (returns IDisposable): Notifies the provider that an observer is to recieve notifications. 
+
+## Backpressure 
+What to do with backpressure and pausing...
+If that is ignored, then converting back and forth between node.js streams and rx streams are a lot easier.
+However, the idea is to sort of try to respect node.js way of handling backpressure
