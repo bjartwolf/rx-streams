@@ -17,21 +17,25 @@ var ObservableFromStream = function(stream) {
             // Object streams emit single object at a time when calling read
             observer.onNext(throughStream.read());
         };
+        /*
+        Error should normally be caught on the stream
         var errorHandler = function (err) {
             // Assuming errorevent has error parameter
-            observer.onError(err); 
+            console.log("I CAUGHT THE ERROR");
+//            observer.onError(err); 
         };
+        */
         var endHandler = function () {
             observer.onCompleted();
         };
         throughStream.addListener('readable', readHandler);
-        throughStream.addListener('error', errorHandler);
+//        stream.addListener('error', errorHandler);
         throughStream.addListener('end', endHandler);
         stream.pipe(throughStream);
         // Create returns the dispose-function for the Observable 
         return function() {
             throughStream.removeListener('readable', readHandler);
-            throughStream.removeListener('error', errorHandler);
+//            stream.removeListener('error', errorHandler);
             throughStream.removeListener('end', endHandler);
             stream.unpipe(throughStream);
         };
