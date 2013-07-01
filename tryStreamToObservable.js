@@ -5,7 +5,8 @@ var testObs = new StreamToObservable(droneStream);
 var Serializer = require('./serializer'); 
 var serializer = new Serializer();
 droneStream.pipe(serializer).pipe(process.stdout);
-
+//droneStream.emit('error', new Error("shit an error"));
+setTimeout(function () { droneStream.emit('end');}, 1500);
 var altitudeObs = testObs.where(function(navdata) { 
      return navdata && navdata.demo && navdata.demo.altitudeMeters;})
   .select(function(navdata) { 

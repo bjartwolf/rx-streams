@@ -60,7 +60,9 @@ Tests
 
 ## OnError and OnCompleted
 This should map fairly well from rx to streams.
-
+End is forwarded in streams, and can be mapped to onCompleted
+Errors aren't really forwarded. Must possibly be handled manually by listening to error events and then doing whatever
+error handling you want to do, including calling onError...?
 
 ## Cold vs hot observables
 Hot observables can't be paused. They can be deferred somehow, but not sure if that helps or not, not sure what the defer function does, I've just heard about it. Should at least consider pausing/unsubscribing temporarily from cold observables if downstream buffers are full. Need a deeper understnading of the cold vs. hot stuff.

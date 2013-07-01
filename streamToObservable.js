@@ -28,6 +28,7 @@ var StreamToObservable = function(stream) {
         throughStream.addListener('end', endHandler);
         stream.pipe(throughStream);
         return function() {
+            // This is the dispose function, should clean up
             throughStream.removeListener('readable', handler);
             throughStream.removeListener('error', errorHandler);
             throughStream.removeListener('end', endHandler);
