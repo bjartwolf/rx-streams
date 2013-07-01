@@ -17,10 +17,20 @@ var StreamToObservable = function(stream) {
         var handler = function () {
             observer.onNext(throughStream.read());// object stream should only emit single object
         };
+        var errorHandler = function (err) {
+            observer.onError(err); // Assuming errorevent has error parameter
+        };
+        var endHandler = function () {
+            observer.onCompleted();
+        };
         throughStream.addListener('readable', handler);
+        throughStream.addListener('error', errorHandler);
+        throughStream.addListener('end', endHandler);
         stream.pipe(throughStream);
         return function() {
             throughStream.removeListener('readable', handler);
+            throughStream.removeListener('error', errorHandler);
+            throughStream.removeListener('end', endHandler);
             stream.unpipe(throughStream);
         };
     });
