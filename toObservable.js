@@ -8,7 +8,7 @@ var toObservable = function(eventName) {
         var handler = function(o) {
             observer.onNext(o);
         };
-        setTimeout(function () { observer.onCompleted();}, 1000);
+//        setTimeout(function () { observer.onCompleted();}, 1000);
         parent.addListener(eventName, handler);
         // The disposable function
         return function() {

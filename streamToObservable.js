@@ -1,40 +1,40 @@
 /*
   Takes a node-stream in objectmode and returns an Observable
-  Should take a readble stream in objectmode as input
-  Seems to be simplest when making a dummy throughstream, using
-  the pipe interface takes care of stuff I don't want to implement myself
+  Seems to be simplest to achieve this by making a dummy throughstream
+  because pipe takes care of things
 */
 
 var rx = require('rx');
 var streams = require('stream');
-var StreamToObservable = function(stream) {
+var ObservableFromStream = function(stream) {
     if (!stream._readableState.objectMode){
         throw new Error("Stream should be in object mode");
     };
     var self = this;
     var throughStream = new streams.PassThrough({objectMode: true});
     return rx.Observable.create(function(observer) {
-        // the subscribe method
-        var handler = function () {
-            observer.onNext(throughStream.read());// object stream should only emit single object
+        var readHandler = function () {
+            // Object streams emit single object at a time when calling read
+            observer.onNext(throughStream.read());
         };
         var errorHandler = function (err) {
-            observer.onError(err); // Assuming errorevent has error parameter
+            // Assuming errorevent has error parameter
+            observer.onError(err); 
         };
         var endHandler = function () {
             observer.onCompleted();
         };
-        throughStream.addListener('readable', handler);
+        throughStream.addListener('readable', readHandler);
         throughStream.addListener('error', errorHandler);
         throughStream.addListener('end', endHandler);
         stream.pipe(throughStream);
+        // Create returns the dispose-function for the Observable 
         return function() {
-            // This is the dispose function, should clean up
-            throughStream.removeListener('readable', handler);
+            throughStream.removeListener('readable', readHandler);
             throughStream.removeListener('error', errorHandler);
             throughStream.removeListener('end', endHandler);
             stream.unpipe(throughStream);
         };
     });
 };
-module.exports = StreamToObservable;
+module.exports = ObservableFromStream;
