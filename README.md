@@ -10,6 +10,14 @@ node runStreamFromObservable
 
 Both test-data streams are set to end after 3000 ms
 
+# Some things to think about
+
+Rx is push-based. Even cold observables are push based once they are subscribed to, the way I understand it. Node.js streams are pull-based, meaning that they decide when they want to pull data from upstream sources. If data is produced at a slower pace than it is consumed, this does not cause any issues. However, if data is consumed at a slower rate than it it produced, data will either have to be buffered or it will be lost. Node.js streams does provide buffering, and this is probably the only way around that issue. Buffer size is currently standard size, but the parameters to increase buffer size should be exposed.
+
+Also, I will try to see how the Subject (IObservable and IObserver) mathces transform streams.
+
+And it's time to look into merging observables to create a merged stream..
+
 # From Rx to node streams and back
 This is just work in progress. My plan is to do use-case by use-case until my brain explodes. The simplest ones are ok, the harder use-cases might require some thinking, and the two different streams implementations might turn out to have inconsistencies that will be hard to smooth out without creating leaky abstractions.
 
