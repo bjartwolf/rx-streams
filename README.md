@@ -93,3 +93,7 @@ However, the idea is to sort of try to respect node.js way of handling backpress
 ## Timing
 
 Rx works with single events and respects their timing, with schedulers etc. Node.js streams buffers events withtout really respecting time, as they are mainly designed to handle I/O streams, where timing of a chunk really does not matter. 
+
+### Another idea
+
+See how many Rx.js things I can port over to streams modules. Some has been done already, but make more like map, filter, zip etc. Those that involve time (combinelatest) are probably not so easy to do... Or might not make sense. But some will make some sense.. maybe.
