@@ -89,3 +89,7 @@ Subscribe (returns IDisposable): Notifies the provider that an observer is to re
 What to do with backpressure and pausing...
 If that is ignored, then converting back and forth between node.js streams and rx streams are a lot easier.
 However, the idea is to sort of try to respect node.js way of handling backpressure
+
+## Timing
+
+Rx works with single events and respects their timing, with schedulers etc. Node.js streams buffers events withtout really respecting time, as they are mainly designed to handle I/O streams, where timing of a chunk really does not matter. 
