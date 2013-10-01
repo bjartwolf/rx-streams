@@ -109,8 +109,9 @@ Dataflow provides backpressure, just like node.js streams.
 
 
 Dataflow | Reactive Extensions
+--- | ---
 Source-block| Readable stream
 Propagator| Transform stream (readable/writable)
 Target blocks| Writeable stream
 
-
+A big difference between Dataflow and node.js streams is that node.js streams are used in the core of node.js. There are some name IO pipes in .NET, maybe those have some equivalents to node.js streams also. Who knows. 
