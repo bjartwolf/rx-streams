@@ -97,3 +97,20 @@ Rx works with single events and respects their timing, with schedulers etc. Node
 ### Another idea
 
 See how many Rx.js things I can port over to streams modules. Some has been done already, but make more like map, filter, zip etc. Those that involve time (combinelatest) are probably not so easy to do... Or might not make sense. But some will make some sense.. maybe.
+
+# .NET Dataflow 
+
+http://msdn.microsoft.com/en-us/library/hh228603.aspx
+
+
+It seems to me that node.js streams are a much better fit, conceptually, with .NET Dataflow. Now, Dataflow does provide a lot more than node.js streams, mainly because of the fact that JavaScript is single threaded this isn't really used in node.js. Dataflow opens up for parallel execution and much more advanced syncronizations.
+
+Dataflow provides backpressure, just like node.js streams.
+
+
+Dataflow | Reactive Extensions
+Source-block| Readable stream
+Propagator| Transform stream (readable/writable)
+Target blocks| Writeable stream
+
+
