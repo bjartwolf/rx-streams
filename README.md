@@ -115,3 +115,8 @@ Propagator| Transform stream (readable/writable)
 Target blocks| Writeable stream
 
 A big difference between Dataflow and node.js streams is that node.js streams are used in the core of node.js. There are some name IO pipes in .NET, maybe those have some equivalents to node.js streams also. Who knows. 
+
+## Backpressure in dataflow
+It seems to be called postpone. You write to a dataflow block by OfferMessage, and the reciever can receive with Accepted, Declined, DecliningPermantently or Postponed. The message can be reserved for future reading, but other targets could also take it. Here it might be some differences from node.js streams. When the target block wants to read the message again, it can call ConsumeMessage or ReleaseReservation. 
+
+I am not sure if the buffering and busy-stuff happens automatically, or if a bufferblock needs to be inserted or what. I have to try this stuff out, I guess.
